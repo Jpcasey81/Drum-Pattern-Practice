@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#e8e8e8">
+    <title>Drum Pattern Practice</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="controls">
+
+        <button id="btn-start">START</button>
+
+        <div class="ctrl-sep"></div>
+
+        <div class="ctrl-group">
+            <label>BPM: <strong id="bpm-val">80</strong></label>
+            <div class="slider-row">
+                <span>40</span>
+                <input type="range" id="bpm-slider" min="40" max="160" value="80" step="1">
+                <span>160</span>
+            </div>
+        </div>
+
+        <div class="ctrl-sep"></div>
+
+        <div class="ctrl-group">
+            <label>Metronome</label>
+            <div class="btn-row">
+                <button id="btn-quarter" class="toggle on">Quarter</button>
+                <button id="btn-16th"    class="toggle">16th</button>
+            </div>
+        </div>
+
+        <div class="ctrl-sep"></div>
+
+        <div class="ctrl-group">
+            <label>Accents: <strong id="density-val">50</strong>%</label>
+            <div class="slider-row">
+                <span>0%</span>
+                <input type="range" id="density-slider" min="0" max="100" value="50" step="1">
+                <span>100%</span>
+            </div>
+        </div>
+
+        <div class="ctrl-sep"></div>
+
+        <div id="position">Measure 1&nbsp;&nbsp;Beat 1</div>
+
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <script src="app.js"></script>
+</body>
+</html>

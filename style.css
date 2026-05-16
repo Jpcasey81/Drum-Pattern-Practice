@@ -1,0 +1,130 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    touch-action: none;
+}
+
+/* ── Control bar ── */
+#controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    padding: 10px 16px;
+    background: #e8e8e8;
+    border-bottom: 1px solid #c0c0c0;
+    flex-shrink: 0;
+    user-select: none;
+}
+
+.ctrl-sep {
+    width: 1px;
+    height: 38px;
+    background: #bbb;
+    flex-shrink: 0;
+}
+
+.ctrl-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.ctrl-group label {
+    font-size: 13px;
+    color: #333;
+}
+
+.slider-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #777;
+}
+
+.btn-row {
+    display: flex;
+    gap: 6px;
+}
+
+/* ── Start / Stop button ── */
+#btn-start {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 22px;
+    height: 48px;
+    min-width: 96px;
+    border: none;
+    border-radius: 8px;
+    background: #4a9e4a;
+    color: #fff;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+#btn-start.on      { background: #c84040; }
+#btn-start:active  { opacity: 0.8; }
+
+/* ── Toggle buttons ── */
+.toggle {
+    font-size: 13px;
+    padding: 0 14px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    background: #8aabde;
+    color: #fff;
+    cursor: pointer;
+}
+.toggle.on    { background: #3a5fc8; }
+.toggle:active { opacity: 0.8; }
+
+/* ── Position readout ── */
+#position {
+    font-size: 13px;
+    color: #555;
+    white-space: nowrap;
+}
+
+/* ── Canvas ── */
+#canvas {
+    display: block;
+    background: #fff;
+    flex: 1;
+    width: 100%;
+}
+
+/* ── Range sliders ── */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 160px;
+    height: 6px;
+    border-radius: 3px;
+    background: #bbb;
+    outline: none;
+    cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #3a5fc8;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3a5fc8;
+    cursor: pointer;
+    border: 2px solid #fff;
+}

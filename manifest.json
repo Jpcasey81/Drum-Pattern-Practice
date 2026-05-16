@@ -1,0 +1,10 @@
+{
+  "name": "Drum Pattern Practice",
+  "short_name": "DrumPractice",
+  "description": "Scrolling drum pattern generator for snare practice",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#e8e8e8",
+  "orientation": "landscape"
+}
