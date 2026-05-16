@@ -25,6 +25,7 @@ let accentDensity = 0.5;
 let measures      = [];
 let lastTs        = null;
 let audioCtx      = null;
+let elapsedTime   = 0;   // seconds played (accumulates while playing, pauses when stopped)
 
 // ─── Audio ────────────────────────────────────────────────────────────────────
 function ensureAudio() {
@@ -72,6 +73,7 @@ function metronomeTick(idx) {
 function update(dt) {
     if (!playing) return;
 
+    elapsedTime += dt;
     scrollX += scrollSpeed() * dt;
 
     const cur = Math.floor(scrollX / NOTE_W);
@@ -245,9 +247,13 @@ function draw() {
 
 // ─── UI ───────────────────────────────────────────────────────────────────────
 function updatePositionReadout() {
-    const mNum = Math.floor(scrollX / MEASURE_W) + 1;
-    const beat = Math.floor((scrollX % MEASURE_W) / (NOTE_W * 4)) + 1;
-    document.getElementById('position').textContent = `Measure ${mNum}   Beat ${beat}`;
+    const mNum    = Math.floor(scrollX / MEASURE_W) + 1;
+    const beat    = Math.floor((scrollX % MEASURE_W) / (NOTE_W * 4)) + 1;
+    const totalSec = Math.floor(elapsedTime);
+    const mins    = Math.floor(totalSec / 60);
+    const secs    = totalSec % 60;
+    const timeStr = `${mins}:${secs.toString().padStart(2, '0')}`;
+    document.getElementById('position').textContent = `Measure ${mNum}   Beat ${beat}   ${timeStr}`;
 }
 
 // ─── Game loop ────────────────────────────────────────────────────────────────
