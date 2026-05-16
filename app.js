@@ -247,13 +247,13 @@ function draw() {
 
 // ─── UI ───────────────────────────────────────────────────────────────────────
 function updatePositionReadout() {
-    const mNum    = Math.floor(scrollX / MEASURE_W) + 1;
-    const beat    = Math.floor((scrollX % MEASURE_W) / (NOTE_W * 4)) + 1;
+    const mNum     = Math.floor(scrollX / MEASURE_W) + 1;
+    const beat     = Math.floor((scrollX % MEASURE_W) / (NOTE_W * 4)) + 1;
     const totalSec = Math.floor(elapsedTime);
-    const mins    = Math.floor(totalSec / 60);
-    const secs    = totalSec % 60;
-    const timeStr = `${mins}:${secs.toString().padStart(2, '0')}`;
-    document.getElementById('position').textContent = `Measure ${mNum}   Beat ${beat}   ${timeStr}`;
+    const mins     = Math.floor(totalSec / 60);
+    const secs     = totalSec % 60;
+    document.getElementById('position').textContent = `Measure ${mNum}   Beat ${beat}`;
+    document.getElementById('elapsed').textContent  = `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 // ─── Game loop ────────────────────────────────────────────────────────────────

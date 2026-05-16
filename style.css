@@ -92,6 +92,13 @@ body {
     white-space: nowrap;
 }
 
+#elapsed {
+    font-size: 13px;
+    color: #555;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
 /* ── Canvas ── */
 #canvas {
     display: block;
