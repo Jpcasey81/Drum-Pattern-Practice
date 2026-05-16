@@ -23,8 +23,6 @@ let metroQuarter  = true;
 let metro16th     = false;
 let accentDensity = 0.5;
 let measures      = [];
-let flashAlpha    = 0;       // 0.0–1.0
-let flashBeat1    = false;
 let lastTs        = null;
 let audioCtx      = null;
 
@@ -69,17 +67,12 @@ function metronomeTick(idx) {
     } else if (metro16th && pos % 4 !== 0) {
         playClick(600, 0.38);
     }
-    if (pos % 4 === 0) {
-        flashAlpha = 1.0;
-        flashBeat1 = (pos === 0);
-    }
 }
 
 function update(dt) {
     if (!playing) return;
 
-    scrollX    += scrollSpeed() * dt;
-    flashAlpha  = Math.max(0, flashAlpha - dt * 5.5);   // fades in ~0.18 s
+    scrollX += scrollSpeed() * dt;
 
     const cur = Math.floor(scrollX / NOTE_W);
     for (let i = lastTick + 1; i <= cur; i++) metronomeTick(i);
@@ -222,12 +215,23 @@ function draw() {
         ctx.beginPath(); ctx.moveTo(endX + 5, top); ctx.lineTo(endX + 5, bot); ctx.stroke();
     }
 
-    // ── Beat flash ────────────────────────────────────────────────────────────
-    if (flashAlpha > 0) {
-        ctx.fillStyle = flashBeat1
-            ? `rgba(255, 90, 20, ${(flashAlpha * 0.55).toFixed(3)})`
-            : `rgba(60, 140, 255, ${(flashAlpha * 0.55).toFixed(3)})`;
-        ctx.fillRect(PLAYHEAD_X - 12, 0, 24, H);
+    // ── Beat flash (position-based — always frame-accurate) ──────────────────
+    // Find how far past the playhead the most recent quarter beat has travelled.
+    // Flash intensity is proportional to proximity, so it's perfectly aligned
+    // regardless of frame rate or BPM.
+    if (playing) {
+        const playheadIdx = scrollX / NOTE_W;
+        const lastQBeat   = Math.floor(playheadIdx / 4) * 4;   // most recent quarter beat index
+        const distPx      = (playheadIdx - lastQBeat) * NOTE_W; // px the beat note has passed playhead
+        const fadeWindow  = scrollSpeed() * 0.18;               // fixed 180 ms window at any BPM
+        if (distPx < fadeWindow) {
+            const intensity = (1 - distPx / fadeWindow) * 0.6;
+            const isBeat1   = lastQBeat % 16 === 0;
+            ctx.fillStyle   = isBeat1
+                ? `rgba(255, 90, 20, ${intensity.toFixed(3)})`
+                : `rgba(60, 140, 255, ${intensity.toFixed(3)})`;
+            ctx.fillRect(PLAYHEAD_X - 12, 0, 24, H);
+        }
     }
 
     // ── Playhead ──────────────────────────────────────────────────────────────
