@@ -252,8 +252,8 @@ function updatePositionReadout() {
     const totalSec = Math.floor(elapsedTime);
     const mins     = Math.floor(totalSec / 60);
     const secs     = totalSec % 60;
-    document.getElementById('position').textContent = `Measure ${mNum}   Beat ${beat}`;
-    document.getElementById('elapsed').textContent  = `${mins}:${secs.toString().padStart(2, '0')}`;
+    document.getElementById('position').textContent = `Measure ${mNum}`;
+    document.getElementById('elapsed').textContent  = `Time: ${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 // ─── Game loop ────────────────────────────────────────────────────────────────
